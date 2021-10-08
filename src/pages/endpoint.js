@@ -6,4 +6,8 @@ export default class Endpoint{
         return API.get(`/pokemon`);
     };
 
+    get_detail_pokemon = (nama_pokemon) => {
+        return API.get(`pokemon/${nama_pokemon}`);
+    }
+
 }

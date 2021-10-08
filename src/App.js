@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {Routes} from './routes/routes';
+import './App.css';
 // import "../src/App.css";
 // import {API} from './helper/api';
 // import {Pokemon} from './pokemon'
 
-// const response = async () => await API.get(`/pokemon`)
+// const response = async () => await API.get(`/pokemon/bulbasaur`)
 // console.log(response());
 
 // // function App() {
@@ -25,7 +26,7 @@ import {Routes} from './routes/routes';
 
 
 // import Halaman from './pages/halaman1';
-import './App.css';
+
 
 class App extends Component {
     render() {

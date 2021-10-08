@@ -3,6 +3,9 @@ import { Redirect} from 'react-router-dom'
 import { Route } from 'react-router-dom';
 
 const halaman1 = React.lazy(() => import('../pages/halaman1'));
+const halaman2 = React.lazy(() => import('../pages/halaman2'));
+const mypokemon = React.lazy(() => import('../pages/mypokemon'));
+
 
 const rootRoute = {
     path: '/',
@@ -18,12 +21,30 @@ const halaman1Routes = {
     route: Route
 };
 
+const halaman2Routes = {
+    path: '/detilpokemon/:nama_pokemon',
+    name: 'Detil Pokemon',
+    component: halaman2,
+    route: Route
+};
+
+const mypokemonRoutes = {
+    path: '/mypokemon',
+    name: 'Detil Pokemon',
+    component: mypokemon,
+    route: Route
+};
+
 const AllWebRoute = [
-    halaman1Routes
+    halaman1Routes,
+    halaman2Routes,
+    mypokemonRoutes
 ]
 
 const MenuWbeRoute = [
-    halaman1Routes
+    halaman1Routes,
+    halaman2Routes,
+    mypokemonRoutes
 ] 
 
 const allRoutes = [

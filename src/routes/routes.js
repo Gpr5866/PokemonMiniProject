@@ -33,6 +33,8 @@ import React, { Component } from "react";
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
 import Halaman from '../pages/halaman1';
+import Detil from '../pages/halaman2';
+import MyPokemon from '../pages/mypokemon';
 
 
 
@@ -57,6 +59,8 @@ export class Routes extends Component  {
             <Switch>
                 {/* <Route exact path ='/' component={(this.checkAuthorized(['root','admin', 'user']) === true) ? Home : UnathorizedPage} /> */}
                 <Route exact path ='/' component={Halaman} />
+                <Route exact path ='/detilpokemon/:nama_pokemon' component={Detil} />
+                <Route exact path ='/mypokemon' component={MyPokemon} />
                 {/* <Route exact path ='/chat' component={Chat} /> */}
                 {/* <Route exact path ='/chat/:type/:room_id' component={Chat} /> */}
             </Switch>
