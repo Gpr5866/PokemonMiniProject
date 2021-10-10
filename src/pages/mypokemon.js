@@ -19,7 +19,9 @@ class MyPokemon extends Component {
             modalEditPokemon: false,
             detilPokemon: [],
             idPokemon: '',
+            namaPokemon:'',
             editNamaPokemon: '',
+            editPokemonInit: 0,
             jumlahEditPokemon: 0,
 
             alertKoneksi: false,
@@ -34,7 +36,8 @@ class MyPokemon extends Component {
         this.setState({
             modalEditPokemon: true,
             idPokemon: record.idPokemon,
-            jumlahEditPokemon: record.editPokemon + 1
+            namaPokemon: record.namaPokemon,
+            editPokemonInit: record.editPokemon
         });
         this.getDetailMyPokemon(record.idPokemon);
     }
@@ -42,10 +45,12 @@ class MyPokemon extends Component {
     tutupModalEditPokemon() {
         this.setState({
             modalEditPokemon: false,
-            modalEditPokemon: false,
             detilPokemon: [],
             idPokemon: '',
+            namaPokemon:'',
             editNamaPokemon: '',
+            editPokemonInit: 0,
+            jumlahEditPokemon: 0,
         })
     }
 
@@ -79,22 +84,13 @@ class MyPokemon extends Component {
             })
     };
 
-    updatePokemon(idPokemon) {
-        // var i = 0;
-        // var fib = [];
-        // fib[0] = 0;
-        // fib[1] = 1;
-        // for (i = 2; i <= 10; i++) {
-        //     // Next fibonacci number = previous + one before previous
-        //     // Translated to JavaScript:
-        //     fib[i] = fib[i - 2] + fib[i - 1];
-        //     console.log(fib[i]);
-        // }
-
-
+    updatePokemon(data) {
         console.log('masuk sini');
+        this.setState({
+            jumlahEditPokemon: this.state.editPokemonInit + 1
+        })
         const formdata = {
-            "namaPokemon": this.state.editNamaPokemon,
+            "namaPokemon": this.state.namaPokemon,
             "editPokemon": this.state.jumlahEditPokemon
         };
         console.log(`isi data = ${formdata}`);
@@ -188,10 +184,12 @@ class MyPokemon extends Component {
                                     type='text'
                                     name='text'
                                     placeholder='nama pokemon baru'
-                                    value={this.state.editNamaPokemon}
-                                    onChange={(e) => {
-                                        this.setState({ editNamaPokemon: e.target.value });
-                                    }}
+                                    // value={this.state.editNamaPokemon}
+                                    // onChange={(e) => {
+                                    //     this.setState({ editNamaPokemon: e.target.value });
+                                    // }}
+                                    value={this.state.detilPokemon.namaPokemon}
+                                    disabled
                                 />
                             </FormGroup>
                         </Row>
