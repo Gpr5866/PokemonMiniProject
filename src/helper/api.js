@@ -1,5 +1,6 @@
 import axios from 'axios';
 import baseURL from './../config';
+import CRUDpokemon from './../config2';
 
 const fetchJSON = (url, options = {}) => {
     return fetch(url, options)
@@ -23,8 +24,8 @@ const API = axios.create({
 });
 
 const API_UPLOAD = axios.create({
-    baseURL: baseURL,
-    headers: { 'Accept': 'application/json', 'Content-Type': 'multipart/form-data; charset=utf-8; boundary="another cool boundary";' },
+    baseURL: CRUDpokemon,
+    headers: { 'Accept': 'application/json' },
 });
 
 

@@ -16,7 +16,7 @@ class Detil extends Component {
             dataPokemonName: '',
             dataPokemonBaseExp: '',
             spritesPokemon: '',
-            dataStatsPokemon:[],
+            dataStatsPokemon: [],
             loadDetilPokemon: false,
             alertKoneksi: false,
         };
@@ -26,6 +26,7 @@ class Detil extends Component {
         this.getDetilPokemon();
 
     };
+
 
     getDetilPokemon() {
         // this.setState({
@@ -40,7 +41,7 @@ class Detil extends Component {
                 var pokemonExp = data.base_experience;
                 var pokemonPicture = data.sprites.front_default;
                 var pokemonStats = data.stats;
-                
+
                 this.setState({
                     dataPokemonAbility: abilityPokemon,
                     dataPokemonName: pokemonName,
@@ -59,12 +60,42 @@ class Detil extends Component {
             })
     };
 
+    catchPokemon() {
+        console.log(`masuk sini`);
+        const dataPokemon = {
+            "namaPokemon": this.state.dataPokemonName,
+            "expPokemon": this.state.dataPokemonBaseExp,
+            "statsPokemon": this.state.dataStatsPokemon,
+            "editPokemon" : 0
+        };
+        // console.log(`isi data : ${JSON.stringify(dataPokemon, null, 2)}`);
+        url.catch_pokemon_baru(dataPokemon)
+            .then((res) => {
+                const { data } = res;
+                console.log(data);
+                if (data !== 'coba lagi') {
+                    // console.log(`isi data : ${JSON.stringify(data, null, 2)}`);
+                    setTimeout(() => {
+                        window.location.href = '/'
+                    }, 300)
+                }
+
+            })
+    }
+
     render() {
         return (
             <Container>
                 <Row>
                     <Col md={6}>
-                        <img style={{ alignItems: 'center', height: '200px', width: '200px' }} src={this.state.spritesPokemon} alt="new" class="center" />
+                        <Row>
+                            <img style={{ alignItems: 'center', height: '200px', width: '200px' }} src={this.state.spritesPokemon} alt="new" class="center" />
+                        </Row>
+
+                        <Row>
+                            <Button onClick={() => this.catchPokemon()}>Catch Pokemon</Button>
+                        </Row>
+
                     </Col>
 
                     <Col md={6}>
@@ -127,7 +158,7 @@ class Detil extends Component {
                                             {/* <th style={{ width: "10%", textAlign: 'center' }}>No</th> */}
                                             <th style={{ width: "15%", textAlign: 'center' }}>Stats</th>
                                             <th style={{ width: "15%", textAlign: 'center' }}>Value</th>
-                                            
+
                                             {/* <th style={{ width: "25%" }}>Detil Pokemon</th> */}
 
                                         </tr>
@@ -149,9 +180,14 @@ class Detil extends Component {
                             </div>
                         </Row>
 
-                
+                        <Row style={{ marginTop: '1em' }}>
+                            <Col md={12}>
+                                <Button style={{ float: 'right', marginRight: '10px' }} size='md' onClick={() => { window.history.back() }}>Kembali</Button>
+                            </Col>
+                        </Row>
 
-                        
+
+
 
                     </Col>
                 </Row>
