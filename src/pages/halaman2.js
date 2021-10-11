@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Row, Col, Media, Card, CardBody, Label, Form, FormGroup, Table, Button, Container } from 'reactstrap';
 import Endpoint from '../pages/endpoint';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const url = new Endpoint();
 
@@ -26,6 +28,8 @@ class Detil extends Component {
         this.getDetilPokemon();
 
     };
+
+    notify_coba_lagi = () => toast('Silahkan Coba Lagi');
 
 
     getDetilPokemon() {
@@ -78,6 +82,8 @@ class Detil extends Component {
                     setTimeout(() => {
                         window.location.href = '/'
                     }, 300)
+                } else{
+                    this.notify_coba_lagi();
                 }
 
             })
@@ -87,6 +93,10 @@ class Detil extends Component {
         return (
             <Container>
                 <Row>
+                    <ToastContainer
+                        position='top-right'
+                    />
+
                     <Col md={6}>
                         <Row>
                             <img style={{ alignItems: 'center', height: '200px', width: '200px' }} src={this.state.spritesPokemon} alt="new" class="center" />

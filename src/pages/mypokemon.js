@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Table, Button, Row, Col, Label, Container, Modal, ModalBody, Form, FormGroup, Input } from 'reactstrap';
 import Endpoint from '../pages/endpoint';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const url = new Endpoint();
 
@@ -20,6 +24,8 @@ class MyPokemon extends Component {
             detilPokemon: [],
             idPokemon: '',
             namaPokemon:'',
+            expPokemon:'',
+            statsPokemon:[],
             editNamaPokemon: '',
             editPokemonInit: 0,
             jumlahEditPokemon: 0,
@@ -32,10 +38,14 @@ class MyPokemon extends Component {
         this.getDataMyPokemon();
     };
 
+    notify_coba_lagi = () => toast('Silahkan Coba Lagi');
+
     bukaModalEditPokemon(record) {
         this.setState({
             modalEditPokemon: true,
             idPokemon: record.idPokemon,
+            expPokemon: record.expPokemon,
+            statsPokemon: record.statsPokemon,
             namaPokemon: record.namaPokemon,
             editPokemonInit: record.editPokemon
         });
@@ -91,7 +101,10 @@ class MyPokemon extends Component {
         })
         const formdata = {
             "namaPokemon": this.state.namaPokemon,
-            "editPokemon": this.state.jumlahEditPokemon
+            "expPokemon": this.state.expPokemon,
+            "statsPokemon": this.state.statsPokemon,
+            "editPokemon": this.state.jumlahEditPokemon,
+            "idPokemon" : this.state.idPokemon,
         };
         console.log(`isi data = ${formdata}`);
         url.update_pokemon(this.state.idPokemon, formdata)
@@ -112,15 +125,25 @@ class MyPokemon extends Component {
 
         url.delete_pokemon_baru(record.idPokemon)
             .then((res) => {
-                setTimeout(() => {
-                    window.location.href = '/mypokemon'
-                }, 300)
+                const {data} = res;
+                console.log(data);
+                if (data !== 'coba lagi'){
+                    setTimeout(() => {
+                        window.location.href = '/mypokemon'
+                    }, 300)
+                } else {
+                    this.notify_coba_lagi();
+                }
+                
             })
     }
 
     render() {
         return (
             <Row>
+                <ToastContainer 
+                    position='top-right' 
+                />
                 <div>
                     <Table className="mb-0" striped responsive>
                         <thead>
